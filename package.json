@@ -8,6 +8,6 @@
     "test": "node tests/index.test.js"
   },
   "dependencies": {
-    "@slidev/cli": "^0.48.4"
+    "@slidev/cli": "^51.8.0"
   }
 }
