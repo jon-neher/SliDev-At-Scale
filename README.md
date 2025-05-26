@@ -17,6 +17,10 @@ This repository contains a starter configuration for building slide decks with [
    ```bash
    npm run build
    ```
+5. Run the test suite:
+   ```bash
+   npm test
+   ```
 
 ## Project Structure
 
