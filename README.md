@@ -9,22 +9,28 @@ This repository contains a starter configuration for building slide decks with [
    ```bash
    npm install
    ```
-3. Start the development server:
+3. Generate slides (defaults to `snapshot-report`):
+   ```bash
+   npm run generate -- snapshot-report
+   ```
+4. Start the development server:
    ```bash
    npm run dev
    ```
-4. Build the slides for production:
+5. Build the slides for production:
    ```bash
    npm run build
    ```
-5. Run the test suite:
+6. Run the test suite:
    ```bash
    npm test
    ```
 
 ## Project Structure
 
-- `slides.md` – Main slide deck written in Markdown.
+- `decks/` – Contains subfolders for each deck (e.g. `snapshot-report`).
+- `decks/<name>/slides.template.md` – Template deck with placeholders.
+- `decks/<name>/slides.md` – Generated deck after running `npm run generate`.
 - `theme/` – Custom theme files for styling decks.
 
-Customize `slides.md` and the files under `theme/` to manage your deck content and styling.
+Customize the template files under `decks/` and the files under `theme/` to manage your deck content and styling.

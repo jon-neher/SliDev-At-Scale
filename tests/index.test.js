@@ -7,7 +7,7 @@ assert(
   "Slidev CLI dependency missing",
 );
 
-const slides = fs.readFileSync("slides.md", "utf8");
+const slides = fs.readFileSync("decks/snapshot-report/slides.md", "utf8");
 assert(
   /theme:\s*vendasta/.test(slides),
   "Slides do not specify vendasta theme",

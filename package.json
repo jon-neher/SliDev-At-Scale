@@ -5,6 +5,7 @@
     "dev": "slidev",
     "build": "slidev build",
     "export": "slidev export",
+    "generate": "node scripts/generate.js",
     "test": "node tests/index.test.js"
   },
   "dependencies": {
