@@ -9,9 +9,14 @@ This repository contains a starter configuration for building slide decks with [
    ```bash
    npm install
    ```
-3. Generate slides (defaults to `snapshot-report`):
+3. Generate slides (defaults to `snapshot-report`). You can specify any deck.
+   The output `slides.md` file is ignored from version control:
    ```bash
-   npm run generate -- snapshot-report
+   npm run generate -- reputation-management
+   npm run generate -- social-marketing
+   npm run generate -- local-seo
+   npm run generate -- inbox-pro
+   # or npm run generate -- snapshot-report
    ```
 4. Start the development server:
    ```bash
@@ -28,9 +33,10 @@ This repository contains a starter configuration for building slide decks with [
 
 ## Project Structure
 
-- `decks/` – Contains subfolders for each deck (e.g. `snapshot-report`).
+- `decks/` – Contains subfolders for each deck (e.g. `snapshot-report`,
+  `reputation-management`, `social-marketing`, `local-seo`, `inbox-pro`).
 - `decks/<name>/slides.template.md` – Template deck with placeholders.
-- `decks/<name>/slides.md` – Generated deck after running `npm run generate`.
+- `decks/<name>/slides.md` – Generated deck after running `npm run generate` (not tracked).
 - `theme/` – Custom theme files for styling decks.
 
 Customize the template files under `decks/` and the files under `theme/` to manage your deck content and styling.

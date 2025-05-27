@@ -8,7 +8,7 @@
     "generate": "node scripts/generate.js",
     "test": "node tests/index.test.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "@slidev/cli": "^51.8.0"
   }
 }
