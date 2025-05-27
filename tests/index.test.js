@@ -7,7 +7,11 @@ assert(
   "Slidev CLI dependency missing",
 );
 
-const slides = fs.readFileSync("decks/snapshot-report/slides.md", "utf8");
+const path = require("path");
+const deck = process.env.DECK || "snapshot-report";
+const slidesPath = path.join("decks", deck, "slides.md");
+assert(fs.existsSync(slidesPath), `Slides not found for deck: ${deck}`);
+const slides = fs.readFileSync(slidesPath, "utf8");
 assert(
   /theme:\s*vendasta/.test(slides),
   "Slides do not specify vendasta theme",
