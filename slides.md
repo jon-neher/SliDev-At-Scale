@@ -1,19 +1,20 @@
 ---
 theme: vendasta
 class: text-center
-
-# Vendasta Partner Slide Deck
-
-Welcome to the Vendasta Partner deck built with Slidev.
 ---
 
-## Agenda
+# Example Product
 
-- Introduction
-- Features
-- Q&A
+Welcome to the Example Product deck.
+
+---
+
+## Features
+
+- Feature one
+- Feature two
+- Feature three
+
 ---
 
 ## Thank You
-
-Ready to start building your own slides!

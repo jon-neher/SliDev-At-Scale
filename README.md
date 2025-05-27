@@ -24,7 +24,13 @@ This repository contains a starter configuration for building slide decks with [
 
 ## Project Structure
 
-- `slides.md` – Main slide deck written in Markdown.
+- `templates/slide-template.md` – Slide deck template containing variables like `{{title}}`.
+- `products/` – JSON files providing content for each product.
+- `slides.md` – Generated deck used by Slidev.
 - `theme/` – Custom theme files for styling decks.
 
-Customize `slides.md` and the files under `theme/` to manage your deck content and styling.
+Run the generator to create `slides.md` for a specific product:
+
+```bash
+npm run generate -- <product-name>
+```
