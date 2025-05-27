@@ -48,6 +48,10 @@ class GenerateSlideModal extends HTMLElement {
                 <span>Selected products</span>
               </label>
             </div>
+            <div>
+              <h3 class="text-lg font-bold">Select product</h3>
+              <select id="product" class="mt-2 w-full border border-gray-300 rounded-lg p-2"></select>
+            </div>
             <div class="flex justify-end">
               <!-- Galaxy primary button: https://galaxy.vendasta.com/components/buttons/ -->
               <button id="generate" class="px-4 py-2 bg-blue-600 text-white rounded-md">
@@ -71,6 +75,32 @@ class GenerateSlideModal extends HTMLElement {
     close.addEventListener("click", () => {
       modal.classList.remove("flex");
       modal.classList.add("hidden");
+    });
+
+    this.populateProducts();
+
+    this.querySelector("#generate").addEventListener("click", async () => {
+      const product = this.querySelector("#product").value;
+      await fetch("/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ product }),
+      });
+      alert(`Slide deck generated for ${product}.`);
+      modal.classList.remove("flex");
+      modal.classList.add("hidden");
+    });
+  }
+
+  async populateProducts() {
+    const res = await fetch("/products");
+    const products = await res.json();
+    const select = this.querySelector("#product");
+    products.forEach((p) => {
+      const option = document.createElement("option");
+      option.value = p;
+      option.textContent = p;
+      select.appendChild(option);
     });
   }
 }

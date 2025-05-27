@@ -65,29 +65,12 @@
             </div>
           </div>
           <div class="flex px-4 py-3">
-            <!-- Primary button uses Galaxy styling: https://galaxy.vendasta.com/components/button -->
-            <button
-              id="generate-slide-deck"
-              class="primary-button flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 flex-1 bg-[#0c7ff2] text-slate-50 text-sm font-bold"
-            >
-              <span class="truncate">Generate Slide Deck</span>
-            </button>
+            <generate-slide-modal></generate-slide-modal>
           </div>
         </div>
       </div>
     </div>
 
-    <script>
-      document
-        .getElementById("generate-slide-deck")
-        .addEventListener("click", async () => {
-          await fetch("/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ product: "example" }),
-          });
-          alert("Slide deck generated.");
-        });
-    </script>
+    <script type="module" src="./generate-modal.js"></script>
   </body>
 </html>
