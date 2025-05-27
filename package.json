@@ -5,9 +5,13 @@
     "dev": "slidev",
     "build": "slidev build",
     "export": "slidev export",
-    "test": "node tests/index.test.js"
+    "test": "node tests/index.test.js",
+    "generate": "node scripts/generateSlides.js"
   },
   "dependencies": {
+    "@slidev/cli": "^51.8.0"
+  },
+  "devDependencies": {
     "@slidev/cli": "^51.8.0"
   }
 }
