@@ -3,7 +3,8 @@ const assert = require("assert");
 
 const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
 assert(
-  pkg.dependencies && pkg.dependencies["@slidev/cli"],
+  (pkg.dependencies && pkg.dependencies["@slidev/cli"]) ||
+    (pkg.devDependencies && pkg.devDependencies["@slidev/cli"]),
   "Slidev CLI dependency missing",
 );
 
