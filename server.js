@@ -1,7 +1,9 @@
 const express = require("express");
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 const path = require("path");
 const fs = require("fs");
+
+let slidevProcess = null;
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -28,6 +30,12 @@ app.post("/generate", (req, res) => {
     if (err) {
       console.error(stderr);
       return res.status(500).json({ error: "Failed to generate slides" });
+    }
+    if (!slidevProcess) {
+      slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
+      slidevProcess.on("close", () => {
+        slidevProcess = null;
+      });
     }
     res.json({ message: stdout.trim() });
   });
