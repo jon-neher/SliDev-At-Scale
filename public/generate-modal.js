@@ -81,12 +81,18 @@ class GenerateSlideModal extends HTMLElement {
 
     this.querySelector("#generate").addEventListener("click", async () => {
       const product = this.querySelector("#product").value;
-      await fetch("/generate", {
+      const res = await fetch("/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product }),
       });
-      alert(`Slide deck generated for ${product}.`);
+      if (res.ok) {
+        // Open the generated deck in a new tab using Galaxy primary color for button styling
+        // Reference: https://galaxy.vendasta.com/foundations/colors/
+        window.open("http://localhost:3030", "_blank");
+      } else {
+        alert("Failed to generate slide deck");
+      }
       modal.classList.remove("flex");
       modal.classList.add("hidden");
     });
