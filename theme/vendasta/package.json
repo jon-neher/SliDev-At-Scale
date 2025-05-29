@@ -1,4 +1,8 @@
 {
   "name": "slidev-theme-vendasta",
-  "version": "0.0.1"
-}
+  "version": "0.0.1",
+  "main": "index.js",
+  "dependencies": {
+    "@slidev/theme-default": "^0.21.2"
+  }
+}\

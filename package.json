@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "express": "^4.18.2",
-    "@slidev/cli": "^51.8.0"
+    "@slidev/cli": "^51.8.0",
+    "slidev-theme-vendasta": "file:./theme/vendasta"
   },
   "devDependencies": {}
 }
