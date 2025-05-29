@@ -9,15 +9,21 @@ This repository contains a starter configuration for building slide decks with [
    ```bash
    npm install
    ```
-3. Start the development server:
+3. Launch the slide generator UI:
+   ```bash
+   npm start
+   ```
+   The interface is available at [http://localhost:3000](http://localhost:3000).
+4. Start Slidev in development mode:
    ```bash
    npm run dev
    ```
-4. Build the slides for production:
+   The presentation is served at [http://localhost:3030](http://localhost:3030).
+5. Build the slides for production:
    ```bash
    npm run build
    ```
-5. Run the test suite:
+6. Run the test suite:
    ```bash
    npm test
    ```
@@ -34,3 +40,10 @@ Run the generator to create `slides.md` for a specific product:
 ```bash
 npm run generate -- <product-name>
 ```
+
+## Using the UI
+
+1. Start the server with `npm start` and open the UI at [http://localhost:3000](http://localhost:3000).
+2. Click **Generate Slides** and choose a product from the dropdown.
+3. Press **Generate** to create `slides.md` for that product.
+4. Run `npm run dev` and navigate to [http://localhost:3030](http://localhost:3030) to view the presentation.
