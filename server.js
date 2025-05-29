@@ -26,19 +26,25 @@ app.get("/products", (req, res) => {
 
 app.post("/generate", (req, res) => {
   const product = req.body.product || "example";
-  exec(`node scripts/generateSlides.js ${product}`, (err, stdout, stderr) => {
-    if (err) {
-      console.error(stderr);
-      return res.status(500).json({ error: "Failed to generate slides" });
-    }
-    if (!slidevProcess) {
-      slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
-      slidevProcess.on("close", () => {
-        slidevProcess = null;
-      });
-    }
-    res.json({ message: stdout.trim() });
-  });
+  const template = req.body.template || "product-overview";
+  const includeRecent = req.body.includeRecent ? "true" : "false";
+  const includeSelected = req.body.includeSelected ? "true" : "false";
+  exec(
+    `node scripts/generateSlides.js ${product} ${template} ${includeRecent} ${includeSelected}`,
+    (err, stdout, stderr) => {
+      if (err) {
+        console.error(stderr);
+        return res.status(500).json({ error: "Failed to generate slides" });
+      }
+      if (!slidevProcess) {
+        slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
+        slidevProcess.on("close", () => {
+          slidevProcess = null;
+        });
+      }
+      res.json({ message: stdout.trim() });
+    },
+  );
 });
 
 app.listen(port, () => {
