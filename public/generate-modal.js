@@ -1,79 +1,92 @@
 class GenerateSlideModal extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <button id="open" class="px-4 py-2 bg-blue-600 text-white rounded-md">
-        Generate Slides
-      </button>
-      <div
-        id="modal"
-        class="fixed inset-0 z-10 hidden items-center justify-center bg-black/50"
+      <button
+        id="open"
+        class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c7ff2] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
       >
+        <span class="truncate">Generate Slide Deck</span>
+      </button>
+      <div id="modal" class="fixed inset-0 z-10 hidden items-center justify-center bg-black/50">
         <div class="bg-white rounded-lg w-full max-w-lg p-6 shadow-md">
           <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold">Generate Slide Deck</h2>
+            <h2 class="text-[#0d141c] tracking-light text-[32px] font-bold leading-tight">
+              Generate Slide Deck
+            </h2>
             <button id="close" class="text-gray-500">&times;</button>
           </div>
           <section class="space-y-4">
             <div>
-              <h3 class="text-lg font-bold">Select a template</h3>
-              <div class="flex gap-3 mt-2">
-                <label class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer">
+              <h3 class="text-[#0d141c] text-lg font-bold leading-tight">Select a template</h3>
+              <div class="flex flex-wrap gap-3 mt-2">
+                <label
+                  class="text-sm font-medium leading-normal flex items-center justify-center rounded-lg border border-[#cedbe8] px-4 h-11 text-[#0d141c] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#0c7ff2] relative cursor-pointer"
+                >
+                  Product Overview
                   <input
                     type="radio"
                     name="template"
                     value="product-overview"
-                    class="sr-only"
+                    class="invisible absolute"
                     checked
                   />
-                  Product Overview
                 </label>
-                <label class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer">
+                <label
+                  class="text-sm font-medium leading-normal flex items-center justify-center rounded-lg border border-[#cedbe8] px-4 h-11 text-[#0d141c] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#0c7ff2] relative cursor-pointer"
+                >
+                  Proposal
                   <input
                     type="radio"
                     name="template"
                     value="proposal"
-                    class="sr-only"
+                    class="invisible absolute"
                   />
-                  Proposal
                 </label>
-                <label class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer">
+                <label
+                  class="text-sm font-medium leading-normal flex items-center justify-center rounded-lg border border-[#cedbe8] px-4 h-11 text-[#0d141c] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#0c7ff2] relative cursor-pointer"
+                >
+                  ROI Summary
                   <input
                     type="radio"
                     name="template"
                     value="roi-summary"
-                    class="sr-only"
+                    class="invisible absolute"
                   />
-                  ROI Summary
                 </label>
               </div>
             </div>
             <div>
-              <h3 class="text-lg font-bold">Include data</h3>
-              <label class="flex items-center gap-2 mt-2">
-                <input
-                  id="recent"
-                  type="checkbox"
-                  class="h-4 w-4 rounded border-gray-300"
-                />
-                <span>Recent activity</span>
-              </label>
-              <label class="flex items-center gap-2 mt-2">
-                <input
-                  id="selected"
-                  type="checkbox"
-                  class="h-4 w-4 rounded border-gray-300"
-                />
-                <span>Selected products</span>
-              </label>
+              <h3 class="text-[#0d141c] text-lg font-bold leading-tight">Include data</h3>
+              <div class="px-4">
+                <label class="flex gap-x-3 py-3 flex-row">
+                  <input
+                    id="recent"
+                    type="checkbox"
+                    class="h-5 w-5 rounded border-[#cedbe8] border-2 bg-transparent text-[#0c7ff2] checked:bg-[#0c7ff2] checked:border-[#0c7ff2] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cedbe8] focus:outline-none"
+                  />
+                  <p class="text-[#0d141c] text-base font-normal leading-normal">Recent activity</p>
+                </label>
+                <label class="flex gap-x-3 py-3 flex-row">
+                  <input
+                    id="selected"
+                    type="checkbox"
+                    class="h-5 w-5 rounded border-[#cedbe8] border-2 bg-transparent text-[#0c7ff2] checked:bg-[#0c7ff2] checked:border-[#0c7ff2] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cedbe8] focus:outline-none"
+                  />
+                  <p class="text-[#0d141c] text-base font-normal leading-normal">Selected products</p>
+                </label>
+              </div>
             </div>
             <div>
-              <h3 class="text-lg font-bold">Select product</h3>
+              <h3 class="text-[#0d141c] text-lg font-bold leading-tight">Select product</h3>
               <select id="product" class="mt-2 w-full border border-gray-300 rounded-lg p-2"></select>
             </div>
-            <div class="flex justify-end">
+            <div class="flex px-4 py-3 justify-end">
               <!-- Galaxy primary button: https://galaxy.vendasta.com/components/buttons/ -->
-              <button id="generate" class="px-4 py-2 bg-blue-600 text-white rounded-md">
-                Generate
+              <button
+                id="generate"
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#0c7ff2] text-slate-50 text-sm font-bold leading-normal tracking-[0.015em]"
+              >
+                <span class="truncate">Generate</span>
               </button>
             </div>
           </section>
