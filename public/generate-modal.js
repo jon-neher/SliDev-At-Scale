@@ -1,12 +1,10 @@
 class GenerateSlideModal extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-      <button id="open" class="px-4 py-2 bg-blue-600 text-white rounded-md">
-        Generate Slides
-      </button>
+      <button id="open" class="primary-button">Generate Slides</button>
       <div
         id="modal"
-        class="fixed inset-0 z-10 hidden items-center justify-center bg-black/50"
+        class="fixed inset-0 z-10 hidden items-center justify-center modal-overlay"
       >
         <div class="bg-white rounded-lg w-full max-w-lg p-6 shadow-md">
           <div class="flex justify-between items-center mb-4">
@@ -72,9 +70,7 @@ class GenerateSlideModal extends HTMLElement {
             </div>
             <div class="flex justify-end">
               <!-- Galaxy primary button: https://galaxy.vendasta.com/components/buttons/ -->
-              <button id="generate" class="px-4 py-2 bg-blue-600 text-white rounded-md">
-                Generate
-              </button>
+              <button id="generate" class="primary-button">Generate</button>
             </div>
           </section>
         </div>
