@@ -17,22 +17,32 @@ class GenerateSlideModal extends HTMLElement {
             <div>
               <h3 class="text-lg font-bold">Select a template</h3>
               <div class="flex gap-3 mt-2">
-                <label
-                  class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer"
-                >
-                  <input type="radio" name="template" class="sr-only" />
+                <label class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="template"
+                    value="product-overview"
+                    class="sr-only"
+                    checked
+                  />
                   Product Overview
                 </label>
-                <label
-                  class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer"
-                >
-                  <input type="radio" name="template" class="sr-only" />
+                <label class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="template"
+                    value="proposal"
+                    class="sr-only"
+                  />
                   Proposal
                 </label>
-                <label
-                  class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer"
-                >
-                  <input type="radio" name="template" class="sr-only" />
+                <label class="border border-gray-300 rounded-lg px-4 py-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="template"
+                    value="roi-summary"
+                    class="sr-only"
+                  />
                   ROI Summary
                 </label>
               </div>
@@ -40,11 +50,19 @@ class GenerateSlideModal extends HTMLElement {
             <div>
               <h3 class="text-lg font-bold">Include data</h3>
               <label class="flex items-center gap-2 mt-2">
-                <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
+                <input
+                  id="recent"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300"
+                />
                 <span>Recent activity</span>
               </label>
               <label class="flex items-center gap-2 mt-2">
-                <input type="checkbox" class="h-4 w-4 rounded border-gray-300" />
+                <input
+                  id="selected"
+                  type="checkbox"
+                  class="h-4 w-4 rounded border-gray-300"
+                />
                 <span>Selected products</span>
               </label>
             </div>
@@ -81,10 +99,20 @@ class GenerateSlideModal extends HTMLElement {
 
     this.querySelector("#generate").addEventListener("click", async () => {
       const product = this.querySelector("#product").value;
+      const template = this.querySelector(
+        'input[name="template"]:checked',
+      ).value;
+      const includeRecent = this.querySelector("#recent").checked;
+      const includeSelected = this.querySelector("#selected").checked;
       const res = await fetch("/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product }),
+        body: JSON.stringify({
+          product,
+          template,
+          includeRecent,
+          includeSelected,
+        }),
       });
       if (res.ok) {
         // Open the generated deck in a new tab using Galaxy primary color for button styling
