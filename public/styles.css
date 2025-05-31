@@ -1,4 +1,11 @@
 /* Vendasta Galaxy inspired utility classes */
+:root {
+  /* Galaxy color tokens reference: https://galaxy.vendasta.com/foundations/colors/ */
+  --color-surface-neutral-50: #f8fafc;
+  --color-surface-primary-500: #2563eb;
+  --color-text-neutral-900: #0d141c;
+  --color-text-subdued: #49739c;
+}
 
 /* Spacing scale reference: https://galaxy.vendasta.com/foundations/spacing/ */
 .flex{display:flex}
@@ -39,12 +46,16 @@
 .bg-slate-50{background-color:#f8fafc}
 .bg-white{background-color:#ffffff}
 .bg-blue-600{background-color:#2563eb}
+.surface-neutral-50{background-color:var(--color-surface-neutral-50)}
+.surface-primary-500{background-color:var(--color-surface-primary-500)}
 .bg-gray-50{background-color:#f9fafb}
 .bg-black\/50{background-color:rgba(0,0,0,0.5)}
 .text-[#0d141c]{color:#0d141c}
 .text-[#49739c]{color:#49739c}
 .text-gray-500{color:#6b7280}
 .text-white{color:#ffffff}
+.text-neutral-900{color:var(--color-text-neutral-900)}
+.text-subdued{color:var(--color-text-subdued)}
 .text-sm{font-size:0.875rem;line-height:1.25rem}
 .text-base{font-size:1rem;line-height:1.5rem}
 .text-lg{font-size:1.125rem;line-height:1.75rem}
@@ -64,4 +75,6 @@
 .z-10{z-index:10}
 .cursor-pointer{cursor:pointer}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}
+.primary-button{background-color:var(--color-surface-primary-500);color:#ffffff;padding:0.5rem 1rem;border-radius:0.375rem}
+.modal-overlay{background-color:rgba(0,0,0,0.5)}
 /* End of utilities */
