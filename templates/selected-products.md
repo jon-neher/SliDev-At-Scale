@@ -1,0 +1,5 @@
+---
+
+## Selected Products
+
+{{selectedProducts}}

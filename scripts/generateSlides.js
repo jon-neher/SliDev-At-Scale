@@ -37,23 +37,32 @@ if (!fs.existsSync(productPath)) {
 
 const template = fs.readFileSync(templatePath, "utf8");
 const data = JSON.parse(fs.readFileSync(productPath, "utf8"));
-let output = template;
 
-Object.entries(data).forEach(([key, value]) => {
-  const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g");
-  output = output.replace(regex, value);
-});
+const applyData = (content) => {
+  let result = content;
+  Object.entries(data).forEach(([key, value]) => {
+    const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g");
+    result = result.replace(regex, value);
+  });
+  return result;
+};
+
+let output = applyData(template);
 
 if (includeRecent) {
-  output += `\n---\n\n## Recent Activity\n\n${
-    data.recentActivity || "No recent activity available."
-  }`;
+  const recentTpl = fs.readFileSync(
+    path.join(__dirname, "..", "templates", "recent-activity.md"),
+    "utf8",
+  );
+  output += applyData(recentTpl);
 }
 
 if (includeSelected) {
-  output += `\n---\n\n## Selected Products\n\n${
-    data.selectedProducts || "No products selected."
-  }`;
+  const selectedTpl = fs.readFileSync(
+    path.join(__dirname, "..", "templates", "selected-products.md"),
+    "utf8",
+  );
+  output += applyData(selectedTpl);
 }
 
 const destPath = path.join(__dirname, "..", "slides.md");
