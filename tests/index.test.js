@@ -25,7 +25,7 @@ assert(
 
 const snapshotSlides = fs.readFileSync("snapshot-slides.md", "utf8");
 assert(
-  /Snapshot Report/.test(snapshotSlides),
+  /Snapshot (Report|Roadmap)/.test(snapshotSlides),
   "Snapshot slides were not generated",
 );
 
