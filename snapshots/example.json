@@ -1,5 +1,13 @@
 {
   "businessName": "Example Business",
-  "reportSummary": "This is a placeholder snapshot report summary.",
+  "intro": "Road-map to turn Example Business into the digital alpha. Below is a 180-day playbook that tackles weak spots and doubles down on strengths.",
+  "phase0Title": "Tire-Rotation & Tune-Up — Fix the Fundamentals",
+  "phase0Details": "- Listings lock-down\n- Review engine rev-up\n- Website first aid\n- Social content cadence reset",
+  "phase1Title": "Sport Mode — Accelerate Demand & Engagement",
+  "phase1Details": "- Paid search & retargeting flywheel\n- Lead-magnet overhaul\n- Reputation showcase widgets\n- Social ads: micro-targeted fun",
+  "phase2Title": "Launch Control — Dominate & Differentiate",
+  "phase2Details": "- SEO content expansion\n- Digital retailing/e-commerce stack\n- First-party data & marketing automation\n- Experience-layer innovation",
+  "keyMetrics": "| KPI | Baseline | 90-Day Target | 180-Day Target |\n| --- | --- | --- | --- |\n| Listing Accuracy | 62% | 90% | 95% |\n| Avg. Review Rating | 4.37 | 4.55 | ≥4.6 |\n| Mobile LCP | 8.3 s | 3 s | <2.5 s |",
+  "closing": "By tightening the nuts, injecting premium fuel and installing a turbo, the business will roar past competitors after the 180‑day mark.",
   "recommendations": "- Improve SEO\n- Engage on social media"
 }
