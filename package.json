@@ -7,6 +7,7 @@
     "export": "slidev export",
     "test": "node tests/index.test.js && node tests/server.test.js",
     "generate": "node scripts/generateSlides.js",
+    "generate-snapshot": "node scripts/generateSnapshotSlides.js",
     "start": "node server.js"
   },
   "dependencies": {

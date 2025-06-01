@@ -11,6 +11,19 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/snapshots", (req, res) => {
+  fs.readdir(path.join(__dirname, "snapshots"), (err, files) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Failed to load snapshots" });
+    }
+    const snapshots = files
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => path.basename(f, ".json"));
+    res.json(snapshots);
+  });
+});
+
 app.get("/products", (req, res) => {
   fs.readdir(path.join(__dirname, "products"), (err, files) => {
     if (err) {
@@ -35,6 +48,27 @@ app.post("/generate", (req, res) => {
       if (err) {
         console.error(stderr);
         return res.status(500).json({ error: "Failed to generate slides" });
+      }
+      if (!slidevProcess) {
+        slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
+        slidevProcess.on("close", () => {
+          slidevProcess = null;
+        });
+      }
+      res.json({ message: stdout.trim() });
+    },
+  );
+});
+
+app.post("/generate-snapshot", (req, res) => {
+  const snapshot = req.body.snapshot || "example";
+  const template = req.body.template || "snapshot-report";
+  exec(
+    `node scripts/generateSnapshotSlides.js ${snapshot} ${template}`,
+    (err, stdout, stderr) => {
+      if (err) {
+        console.error(stderr);
+        return res.status(500).json({ error: "Failed to generate snapshot" });
       }
       if (!slidevProcess) {
         slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
