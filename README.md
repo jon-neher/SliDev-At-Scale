@@ -32,13 +32,21 @@ This repository contains a starter configuration for building slide decks with [
 
 - `templates/slide-template.md` – Slide deck template containing variables like `{{title}}`.
 - `products/` – JSON files providing content for each product.
+- `snapshots/` – JSON files containing Snapshot Report data.
 - `slides.md` – Generated deck used by Slidev.
+- `snapshot-slides.md` – Generated deck for Snapshot Reports.
 - `theme/` – Custom theme files for styling decks.
 
 Run the generator to create `slides.md` for a specific product:
 
 ```bash
 npm run generate -- <product-name>
+```
+
+Generate `snapshot-slides.md` from snapshot data:
+
+```bash
+node scripts/generateSnapshotSlides.js <snapshot-name>
 ```
 
 ## Using the UI

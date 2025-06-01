@@ -18,10 +18,3 @@ Welcome to the Example Product deck.
 ---
 
 ## Thank You
-
----
-
-## Recent Activity
-
-- Signed 3 new clients
-- Launched v2.0

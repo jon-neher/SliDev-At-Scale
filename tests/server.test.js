@@ -31,9 +31,32 @@ async function testProductsEndpoint() {
   assert(products.includes("example"), "Example product missing from list");
 }
 
+async function testSnapshotsEndpoint() {
+  const snapshots = await new Promise((resolve, reject) => {
+    http
+      .get("http://localhost:3000/snapshots", (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+        res.on("end", () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (err) {
+            reject(err);
+          }
+        });
+      })
+      .on("error", reject);
+  });
+  assert(Array.isArray(snapshots), "Snapshots response not array");
+  assert(snapshots.includes("example"), "Example snapshot missing from list");
+}
+
 (async () => {
   try {
     await testProductsEndpoint();
+    await testSnapshotsEndpoint();
     console.log("Server tests passed");
   } catch (err) {
     console.error(err);
