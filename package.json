@@ -5,7 +5,7 @@
     "dev": "slidev",
     "build": "slidev build",
     "export": "slidev export",
-    "test": "node tests/index.test.js && node tests/server.test.js",
+    "test": "node tests/index.test.js && node tests/server.test.js && node tests/generate-snapshot.test.js",
     "generate": "node scripts/generateSlides.js",
     "generate-snapshot": "node scripts/generateSnapshotSlides.js",
     "start": "node server.js"
