@@ -14,11 +14,12 @@ This repository contains a starter configuration for building slide decks with [
    npm start
    ```
    The interface is available at [http://localhost:3000](http://localhost:3000).
-4. Start Slidev in development mode:
+4. Start Slidev in development mode manually (optional):
    ```bash
    npm run dev
    ```
    The presentation is served at [http://localhost:3030](http://localhost:3030).
+   When using the generator UI, Slidev will be launched for you automatically.
 5. Build the slides for production:
    ```bash
    npm run build
@@ -53,5 +54,4 @@ node scripts/generateSnapshotSlides.js <snapshot-name>
 
 1. Start the server with `npm start` and open the UI at [http://localhost:3000](http://localhost:3000).
 2. Click **Generate Slides** and choose a product from the dropdown.
-3. Press **Generate** to create `slides.md` for that product.
-4. Run `npm run dev` and navigate to [http://localhost:3030](http://localhost:3030) to view the presentation.
+3. Press **Generate** to create `slides.md` for that product. Slidev will start automatically if it is not already running, and a new tab will open at [http://localhost:3030](http://localhost:3030) to display the presentation.
