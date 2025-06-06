@@ -25,3 +25,43 @@ h6 {
   font-weight: 600;
   margin-bottom: 0.5em;
 }
+
+/* Background image styling based on frontmatter bg-num */
+
+.slidev-slide[data-bg-num='1'] {
+  background-image: url('/backgrounds/slide-bkgd-1.jpg');
+}
+
+.slidev-slide[data-bg-num='2'] {
+  background-image: url('/backgrounds/slide-bkgd-2.jpg');
+}
+
+.slidev-slide[data-bg-num='3'] {
+  background-image: url('/backgrounds/slide-bkgd-3.jpg');
+}
+
+.slidev-slide[data-bg-num='4'] {
+  background-image: url('/backgrounds/slide-bkgd-4.jpg');
+}
+
+.slidev-slide[data-bg-num='5'] {
+  background-image: url('/backgrounds/slide-bkgd-5.jpg');
+}
+
+.slidev-slide[data-bg-num='6'] {
+  background-image: url('/backgrounds/slide-bkgd-6.jpg');
+}
+
+.slidev-slide[data-bg-num='7'] {
+  background-image: url('/backgrounds/slide-bkgd-7.jpg');
+}
+
+.slidev-slide[data-bg-num='8'] {
+  background-image: url('/backgrounds/slide-bkgd-8.jpg');
+}
+
+.slidev-slide[data-bg-num] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
