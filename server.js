@@ -49,12 +49,15 @@ app.post("/generate", (req, res) => {
         console.error(stderr);
         return res.status(500).json({ error: "Failed to generate slides" });
       }
-      if (!slidevProcess) {
-        slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
-        slidevProcess.on("close", () => {
-          slidevProcess = null;
-        });
+      if (slidevProcess) {
+        slidevProcess.kill();
       }
+      slidevProcess = spawn("npx", ["slidev", "slides.md"], {
+        stdio: "inherit",
+      });
+      slidevProcess.on("close", () => {
+        slidevProcess = null;
+      });
       res.json({ message: stdout.trim() });
     },
   );
@@ -70,12 +73,15 @@ app.post("/generate-snapshot", (req, res) => {
         console.error(stderr);
         return res.status(500).json({ error: "Failed to generate snapshot" });
       }
-      if (!slidevProcess) {
-        slidevProcess = spawn("npx", ["slidev"], { stdio: "inherit" });
-        slidevProcess.on("close", () => {
-          slidevProcess = null;
-        });
+      if (slidevProcess) {
+        slidevProcess.kill();
       }
+      slidevProcess = spawn("npx", ["slidev", "snapshot-slides.md"], {
+        stdio: "inherit",
+      });
+      slidevProcess.on("close", () => {
+        slidevProcess = null;
+      });
       res.json({ message: stdout.trim() });
     },
   );
