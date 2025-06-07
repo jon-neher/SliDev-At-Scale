@@ -20,6 +20,12 @@ class GenerateSnapshotModal extends HTMLElement {
           </section>
         </div>
       </div>
+      <div id="loading-snapshot" class="fixed inset-0 z-20 hidden items-center justify-center modal-overlay">
+        <div class="flex items-center gap-2 bg-white rounded-md p-4 shadow-md">
+          <div class="spinner"></div>
+          <p class="text-neutral-900 text-sm">Starting preview…</p>
+        </div>
+      </div>
     `;
 
     const open = this.querySelector("#open-snapshot");
@@ -38,20 +44,37 @@ class GenerateSnapshotModal extends HTMLElement {
 
     this.populateSnapshots();
 
+    const loadingSnapshot = this.querySelector("#loading-snapshot");
+
     this.querySelector("#generate-snapshot").addEventListener(
       "click",
       async () => {
+        loadingSnapshot.classList.remove("hidden");
         const snapshot = this.querySelector("#snapshot").value;
         const res = await fetch("/generate-snapshot", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ snapshot }),
         });
-        if (res.ok) {
+
+        const waitForServer = async () => {
+          for (let i = 0; i < 30; i++) {
+            try {
+              await fetch("http://localhost:3030", { mode: "no-cors" });
+              return true;
+            } catch (e) {
+              await new Promise((r) => setTimeout(r, 1000));
+            }
+          }
+          return false;
+        };
+
+        if (res.ok && (await waitForServer())) {
           window.open("http://localhost:3030", "_blank");
         } else {
           alert("Failed to generate snapshot deck");
         }
+        loadingSnapshot.classList.add("hidden");
         modal.classList.remove("flex");
         modal.classList.add("hidden");
       },

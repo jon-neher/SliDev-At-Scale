@@ -2,10 +2,7 @@ class GenerateSlideModal extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
       <button id="open" class="primary-button">Generate Slides</button>
-      <div
-        id="modal"
-        class="fixed inset-0 z-10 hidden items-center justify-center modal-overlay"
-      >
+      <div id="modal" class="fixed inset-0 z-10 hidden items-center justify-center modal-overlay">
         <div class="bg-white rounded-lg w-full max-w-lg p-6 shadow-md">
           <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-bold">Generate Slide Deck</h2>
@@ -75,6 +72,12 @@ class GenerateSlideModal extends HTMLElement {
           </section>
         </div>
       </div>
+      <div id="loading" class="fixed inset-0 z-20 hidden items-center justify-center modal-overlay">
+        <div class="flex items-center gap-2 bg-white rounded-md p-4 shadow-md">
+          <div class="spinner"></div>
+          <p class="text-neutral-900 text-sm">Starting preview…</p>
+        </div>
+      </div>
     `;
 
     const open = this.querySelector("#open");
@@ -93,7 +96,10 @@ class GenerateSlideModal extends HTMLElement {
 
     this.populateProducts();
 
+    const loading = this.querySelector("#loading");
+
     this.querySelector("#generate").addEventListener("click", async () => {
+      loading.classList.remove("hidden");
       const product = this.querySelector("#product").value;
       const template = this.querySelector(
         'input[name="template"]:checked',
@@ -110,13 +116,26 @@ class GenerateSlideModal extends HTMLElement {
           includeSelected,
         }),
       });
-      if (res.ok) {
+      const waitForServer = async () => {
+        for (let i = 0; i < 30; i++) {
+          try {
+            await fetch("http://localhost:3030", { mode: "no-cors" });
+            return true;
+          } catch (e) {
+            await new Promise((r) => setTimeout(r, 1000));
+          }
+        }
+        return false;
+      };
+
+      if (res.ok && (await waitForServer())) {
         // Open the generated deck in a new tab using Galaxy primary color for button styling
         // Reference: https://galaxy.vendasta.com/foundations/colors/
         window.open("http://localhost:3030", "_blank");
       } else {
         alert("Failed to generate slide deck");
       }
+      loading.classList.add("hidden");
       modal.classList.remove("flex");
       modal.classList.add("hidden");
     });
