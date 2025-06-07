@@ -68,6 +68,11 @@ class GenerateSlideModal extends HTMLElement {
               <h3 class="text-lg font-bold">Select product</h3>
               <select id="product" class="mt-2 w-full border border-gray-300 rounded-lg p-2"></select>
             </div>
+            <div id="edition-container" class="hidden">
+              <h3 class="text-lg font-bold">Select edition</h3>
+              <!-- Galaxy form control styles: https://galaxy.vendasta.com/components/form-elements/ -->
+              <select id="edition" class="mt-2 w-full border border-gray-300 rounded-lg p-2"></select>
+            </div>
             <div class="flex justify-end">
               <!-- Galaxy primary button: https://galaxy.vendasta.com/components/buttons/ -->
               <button id="generate" class="primary-button">Generate</button>
@@ -94,7 +99,12 @@ class GenerateSlideModal extends HTMLElement {
     this.populateProducts();
 
     this.querySelector("#generate").addEventListener("click", async () => {
-      const product = this.querySelector("#product").value;
+      let product = this.querySelector("#product").value;
+      const editionContainer = this.querySelector("#edition-container");
+      if (!editionContainer.classList.contains("hidden")) {
+        const ed = this.querySelector("#edition").value;
+        product = `${product}-${ed}`;
+      }
       const template = this.querySelector(
         'input[name="template"]:checked',
       ).value;
@@ -126,12 +136,42 @@ class GenerateSlideModal extends HTMLElement {
     const res = await fetch("/products");
     const products = await res.json();
     const select = this.querySelector("#product");
+
+    this.productEditions = {};
     products.forEach((p) => {
+      const [name, edition] = p.split("-");
+      if (!this.productEditions[name]) this.productEditions[name] = [];
+      if (edition) this.productEditions[name].push(edition);
+    });
+
+    Object.keys(this.productEditions).forEach((name) => {
       const option = document.createElement("option");
-      option.value = p;
-      option.textContent = p;
+      option.value = name;
+      option.textContent = name;
       select.appendChild(option);
     });
+
+    select.addEventListener("change", () => this.updateEditions());
+    this.updateEditions();
+  }
+
+  updateEditions() {
+    const product = this.querySelector("#product").value;
+    const editions = this.productEditions[product];
+    const container = this.querySelector("#edition-container");
+    const select = this.querySelector("#edition");
+    select.innerHTML = "";
+    if (editions && editions.length) {
+      editions.forEach((ed) => {
+        const option = document.createElement("option");
+        option.value = ed;
+        option.textContent = ed;
+        select.appendChild(option);
+      });
+      container.classList.remove("hidden");
+    } else {
+      container.classList.add("hidden");
+    }
   }
 }
 
