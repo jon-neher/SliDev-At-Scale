@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const productName = process.argv[2];
 const templateName = process.argv[3] || "product-overview";
@@ -8,7 +8,7 @@ const includeSelected = process.argv[5] === "true";
 
 if (!productName) {
   console.error(
-    "Usage: node scripts/generateSlides.js <product> [template] [includeRecent] [includeSelected]",
+    "Usage: ts-node scripts/generateSlides.ts <product> [template] [includeRecent] [includeSelected]",
   );
   process.exit(1);
 }
@@ -36,9 +36,11 @@ if (!fs.existsSync(productPath)) {
 }
 
 const template = fs.readFileSync(templatePath, "utf8");
-const data = JSON.parse(fs.readFileSync(productPath, "utf8"));
+const data: Record<string, string> = JSON.parse(
+  fs.readFileSync(productPath, "utf8"),
+);
 
-const applyData = (content) => {
+const applyData = (content: string) => {
   let result = content;
   Object.entries(data).forEach(([key, value]) => {
     const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g");

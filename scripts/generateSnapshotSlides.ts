@@ -1,12 +1,12 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
 const snapshotName = process.argv[2];
 const templateName = process.argv[3] || "snapshot-report";
 
 if (!snapshotName) {
   console.error(
-    "Usage: node scripts/generateSnapshotSlides.js <snapshot> [template]",
+    "Usage: ts-node scripts/generateSnapshotSlides.ts <snapshot> [template]",
   );
   process.exit(1);
 }
@@ -34,9 +34,11 @@ if (!fs.existsSync(snapshotPath)) {
 }
 
 const template = fs.readFileSync(templatePath, "utf8");
-const data = JSON.parse(fs.readFileSync(snapshotPath, "utf8"));
+const data: Record<string, string> = JSON.parse(
+  fs.readFileSync(snapshotPath, "utf8"),
+);
 
-const applyData = (content) => {
+const applyData = (content: string) => {
   let result = content;
   Object.entries(data).forEach(([key, value]) => {
     const regex = new RegExp(`{{\\s*${key}\\s*}}`, "g");
