@@ -3,17 +3,20 @@ const http = require("http");
 const fs = require("fs");
 const assert = require("assert");
 
-const server = spawn("node", ["server.js"], { stdio: "ignore" });
+const server = spawn("go", ["run", "server.go"], {
+  stdio: "ignore",
+  env: { ...process.env, PORT: "3100" },
+});
 
 function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 async function testProductsEndpoint() {
-  await wait(1000);
+  await wait(2000);
   const products = await new Promise((resolve, reject) => {
     http
-      .get("http://localhost:3000/products", (res) => {
+      .get("http://localhost:3100/products", (res) => {
         let data = "";
         res.on("data", (chunk) => {
           data += chunk;
@@ -35,7 +38,7 @@ async function testProductsEndpoint() {
 async function testSnapshotsEndpoint() {
   const snapshots = await new Promise((resolve, reject) => {
     http
-      .get("http://localhost:3000/snapshots", (res) => {
+      .get("http://localhost:3100/snapshots", (res) => {
         let data = "";
         res.on("data", (chunk) => {
           data += chunk;
@@ -60,7 +63,7 @@ async function testGenerateSnapshotEndpoint() {
     const req = http.request(
       {
         hostname: "localhost",
-        port: 3000,
+        port: 3100,
         path: "/generate-snapshot",
         method: "POST",
         headers: {

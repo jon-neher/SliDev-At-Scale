@@ -6,15 +6,16 @@
     "build": "slidev build",
     "export": "slidev export",
     "test": "node tests/index.test.js && node tests/server.test.js && node tests/generate-snapshot.test.js",
-    "generate": "node scripts/generateSlides.js",
-    "generate-snapshot": "node scripts/generateSnapshotSlides.js",
-    "start": "node server.js"
+    "generate": "ts-node scripts/generateSlides.ts",
+    "generate-snapshot": "ts-node scripts/generateSnapshotSlides.ts",
+    "start": "go run server.go"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "slidev-theme-vendasta": "file:theme/vendasta"
   },
   "devDependencies": {
-    "@slidev/cli": "^51.8.0"
+    "@slidev/cli": "^51.8.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.2.2"
   }
 }
