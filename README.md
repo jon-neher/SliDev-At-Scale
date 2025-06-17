@@ -4,7 +4,7 @@ This repository contains a starter configuration for building slide decks with [
 
 ## Getting Started
 
-1. Install Node.js (version 16 or later).
+1. Install Node.js (version 16 or later) and Go (1.20 or later).
 2. Install dependencies:
    ```bash
    npm install
@@ -13,7 +13,7 @@ This repository contains a starter configuration for building slide decks with [
    ```bash
    npm start
    ```
-   The interface is available at [http://localhost:3000](http://localhost:3000).
+   The Go server listens at [http://localhost:3000](http://localhost:3000).
 4. Start Slidev in development mode manually (optional):
    ```bash
    npm run dev
@@ -47,7 +47,7 @@ npm run generate -- <product-name>
 Generate `snapshot-slides.md` from snapshot data:
 
 ```bash
-node scripts/generateSnapshotSlides.js <snapshot-name>
+npm run generate-snapshot -- <snapshot-name>
 ```
 
 ## Using the UI

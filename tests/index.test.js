@@ -10,10 +10,10 @@ assert(
 );
 
 // generate product deck without optional sections
-execSync("node scripts/generateSlides.js example");
+execSync("npx ts-node scripts/generateSlides.ts example");
 
 // generate snapshot deck
-execSync("node scripts/generateSnapshotSlides.js example");
+execSync("npx ts-node scripts/generateSnapshotSlides.ts example");
 
 let slides = fs.readFileSync("slides.md", "utf8");
 assert(
@@ -26,7 +26,9 @@ assert(
 );
 
 // generate product deck with optional Recent Activity and Selected Products slides
-execSync("node scripts/generateSlides.js example product-overview true true");
+execSync(
+  "npx ts-node scripts/generateSlides.ts example product-overview true true",
+);
 slides = fs.readFileSync("slides.md", "utf8");
 assert(/Recent Activity/.test(slides), "Recent Activity section missing");
 assert(/Selected Products/.test(slides), "Selected Products section missing");
